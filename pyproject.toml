@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "memento-cli"
+version = "0.0.1"
+description = "Look at snapshots in Web Archives like the Internet Archive's Wayback Machine"
+authors = ["Ed Summers <ehs@pobox.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "memento_cli"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+click = "^8.1.7"
+selenium = "^4.12.0"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+
+[tool.poetry.scripts]
+memento = "memento_cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
