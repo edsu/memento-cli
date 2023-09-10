@@ -1,4 +1,4 @@
-# [ ] memento-cli
+# memento-cli
 
 A command line tool interacting with Memento ([RFC 7089](https://www.rfc-editor.org/rfc/rfc7089)) supporting web archives, such as the Internet Archive's Wayback Machine.
 
@@ -48,6 +48,8 @@ $ memento bisect --missing --text "women, people of color, lesbian, gay" \
   https://web.archive.org/web/20190711134608/https://help.twitter.com/en/rules-and-policies/hateful-conduct-policy \
   https://web.archive.org/web/20230621094005/https://help.twitter.com/en/rules-and-policies/hateful-conduct-policy
 ```
+
+<video src="https://raw.githubusercontent.com/edsu/memento-cli/main/images/memento.mp4"></video>
 
 The *bisect* command uses a browser behind the scenes (using Selenium) in order to fully render the page. If you wanted to find out when some text appears (rather than goes missing) then remove the `--missing` parameter from the command.
 

@@ -1,4 +1,5 @@
 import re
+import shutil
 import datetime
 import requests
 import requests.utils
@@ -103,7 +104,8 @@ def bisect(start, end, memento_urls, text, missing, browser) -> str:
 
 
 def meter(start, end, n):
-    width = 40
+    # get the width of the progress bar (factoring in the leading counter)
+    width = shutil.get_terminal_size().columns - (len(str(n)) * 2 + 10)
     scale = width / n
     a = int((start + 1) * scale)
     b = int((end - start + 1) * scale)

@@ -29,8 +29,9 @@ def list(url):
 @click.option('--missing', is_flag=True, help='missing text to look for on the page')
 @click.option('--show-browser', is_flag=True, help='see the browser')
 def bisect(start_url, end_url, text, missing, show_browser):
+    print()
     url = memento.bisect_urls(start_url, end_url, text, missing, show_browser)
-    click.echo(f'\rfound snapshot: {url}')
+    click.echo(f'\rFound your archive snapshot: {url}')
 
 
 def main():
