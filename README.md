@@ -51,7 +51,7 @@ $ memento bisect --missing --text "women, people of color, lesbian, gay" \
   https://web.archive.org/web/20230621094005/https://help.twitter.com/en/rules-and-policies/hateful-conduct-policy
 ```
 
-<img src="https://raw.githubusercontent.com/edsu/memento-cli/main/images/memento.gif">
+<img src="https://github.com/edsu/memento-cli/raw/main/images/memento.gif">
 
 The *bisect* command uses a browser behind the scenes (using Selenium) in order to fully render the page. If you wanted to find out when some text appears (rather than goes missing) then remove the `--missing` parameter from the command.
 
