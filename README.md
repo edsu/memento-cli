@@ -1,5 +1,7 @@
 # memento-cli
 
+[![Build Status](https://github.com/edsu/memento-cli/actions/workflows/test.yml/badge.svg)](https://github.com/edsu/memento-cli/actions/workflows/test.yml)
+
 A command line tool interacting with Memento ([RFC 7089](https://www.rfc-editor.org/rfc/rfc7089)) supporting web archives, such as the Internet Archive's Wayback Machine.
 
 ## Usage
