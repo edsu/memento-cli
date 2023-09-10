@@ -58,8 +58,9 @@ def test_bisect():
     timemap = get_timemap_url('http://web.archive.org/web/20230902020134/https://inkdroid.org/')
     mementos = sorted(get_mementos(timemap), key=lambda m: m.datetime)
     mementos = [m.url for m in mementos]
+    browser = Browser(headless=True)
 
-    url = bisect(0, len(mementos), mementos, 'ReSpec Writing')
+    url = bisect(0, len(mementos), mementos, 'ReSpec Writing', missing=False, browser=browser)
     assert url == 'http://web.archive.org/web/20230601013229/https://inkdroid.org/'
 
 

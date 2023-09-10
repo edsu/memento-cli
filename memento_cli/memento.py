@@ -51,7 +51,7 @@ def parse_links(text) -> list[dict]:
     return requests.utils.parse_header_links(text)
 
 
-def bisect_urls(start_url, end_url, text) -> str:
+def bisect_urls(start_url, end_url, text=None, missing=False, show_browser=False) -> str:
     timemap_url = get_timemap_url(start_url)
     mementos = sorted(get_mementos(timemap_url), key=lambda m: m.datetime)
     memento_urls = [m.url for m in mementos]
@@ -59,20 +59,54 @@ def bisect_urls(start_url, end_url, text) -> str:
     start = memento_urls.index(start_url)
     end = memento_urls.index(end_url)
 
-    return bisect(start, end, memento_urls, text)
+    if text is None:
+        show_browser = True
+
+    browser = Browser(headless=(not show_browser))
+
+    return bisect(start, end, memento_urls, text, missing, browser)
 
 
-def bisect(start, end, memento_urls, text, browser=None) -> str: 
-    print(start, end)
-    if browser == None:
-        browser = Browser(headless=True)
+def bisect(start, end, memento_urls, text, missing, browser) -> str: 
 
     mid = start + int((end - start) / 2)
     if mid == start:
         return memento_urls[end]
 
     page_text = browser.get(memento_urls[mid])
-    if text in page_text:
-        return bisect(start, mid, memento_urls, text, browser)
+
+    # if user wants to look at the page themselves
+    if text is None:
+        answer = input("Do you see the change? [y/n] ")
+        if answer.lower() == "y":
+            text_in_page = True
+        else:
+            text_in_page = False
+    # look in the page text
     else:
-        return bisect(mid, end, memento_urls, text, browser)
+        print('\r' + meter(start, end, len(memento_urls)), end='')
+        text_in_page = text in page_text
+
+    # do we want to find the page where the text went missing?
+    if missing:
+        if not text_in_page:
+            return bisect(start, mid, memento_urls, text, missing, browser)
+        else:
+            return bisect(mid, end, memento_urls, text, missing, browser)
+
+    # or do we want to find the page where the text started appearing?
+    else:
+        if text_in_page:
+            return bisect(start, mid, memento_urls, text, missing, browser)
+        else:
+            return bisect(mid, end, memento_urls, text, missing, browser)
+
+
+def meter(start, end, n):
+    width = 40
+    scale = width / n
+    a = int((start + 1) * scale)
+    b = int((end - start + 1) * scale)
+    c = int((n - end + 1) * scale)
+
+    return f'[{n - (end - start)}/{n}]: ' + a * '█' + b * '░' + c * '█'

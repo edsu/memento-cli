@@ -25,10 +25,12 @@ def list(url):
 @cli.command()
 @click.argument('start-url')
 @click.argument('end-url')
-@click.option('--text', help='text to search for on the page')
-def bisect_urls(start_url, end_url, text):
-    url = memento.bisect_urls(start_url, end_url, text)
-    print(url)
+@click.option('--text', help='text to look for on the page')
+@click.option('--missing', is_flag=True, help='missing text to look for on the page')
+@click.option('--show-browser', is_flag=True, help='see the browser')
+def bisect(start_url, end_url, text, missing, show_browser):
+    url = memento.bisect_urls(start_url, end_url, text, missing, show_browser)
+    click.echo(f'\rfound snapshot: {url}')
 
 
 def main():
