@@ -64,14 +64,14 @@ def parse_links(text) -> list[dict]:
 
 
 def bisect_urls(
-    start_url, end_url, text=None, missing=False, show_browser=False
+    start_url, end_url=None, text=None, missing=False, show_browser=False
 ) -> str:
     timemap_url = get_timemap_url(start_url)
     mementos = sorted(get_mementos(timemap_url), key=lambda m: m.datetime)
     memento_urls = [m.url for m in mementos]
 
     start = memento_urls.index(start_url)
-    end = memento_urls.index(end_url)
+    end = memento_urls.index(end_url) if end_url else len(memento_urls) - 1
 
     if text is None:
         show_browser = True

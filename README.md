@@ -53,6 +53,8 @@ $ memento bisect --missing --text "women, people of color, lesbian, gay" \
 
 <img src="https://github.com/edsu/memento-cli/raw/main/images/memento.gif">
 
+If you only provide one snapshot URL it will use that as the start index, and use the last snapshot in the archive as the end.
+
 The *bisect* command uses a browser behind the scenes (using Selenium) in order to fully render the page. If you wanted to find out when some text appears (rather than goes missing) then remove the `--missing` parameter from the command.
 
 And if you would prefer to examine the pages in between manually, leave off the `--text` parameter and *memento* will prompt you to continue, and show you the browser it is controlling.
