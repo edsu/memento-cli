@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "memento-cli"
-version = "0.0.1"
+version = "0.0.2"
 description = "Examine snapshots in eeb archives such as the Internet Archive's Wayback Machine"
 authors = ["Ed Summers <ehs@pobox.com>"]
 license = "MIT"
