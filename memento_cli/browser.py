@@ -7,7 +7,8 @@ class Browser:
     """
     A class for fetching text from a web page using a browser. This ensures
     that any page rendering due to JavaScript is executed, and iframes
-    are processed.
+    are processed. it uses Selenium to control a browser. I guess it would be
+    cooler if it used Playwright, but that's for another day.
     """
 
     def __init__(self, headless=False):
