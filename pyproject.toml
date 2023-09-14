@@ -19,6 +19,9 @@ pytest = "^7.4.2"
 [tool.poetry.scripts]
 memento = "memento_cli:main"
 
+[tool.black]
+include = ".py$"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

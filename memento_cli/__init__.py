@@ -9,7 +9,7 @@ def cli():
 
 
 @cli.command()
-@click.argument('url')
+@click.argument("url")
 def list(url):
     # auto-detect the timemap if it's a memento supporting web archive
     timemap_url = memento.get_timemap_url(url)
@@ -23,15 +23,15 @@ def list(url):
 
 
 @cli.command()
-@click.argument('start-url')
-@click.argument('end-url')
-@click.option('--text', help='text to look for on the page')
-@click.option('--missing', is_flag=True, help='missing text to look for on the page')
-@click.option('--show-browser', is_flag=True, help='see the browser')
+@click.argument("start-url")
+@click.argument("end-url")
+@click.option("--text", help="text to look for on the page")
+@click.option("--missing", is_flag=True, help="missing text to look for on the page")
+@click.option("--show-browser", is_flag=True, help="see the browser")
 def bisect(start_url, end_url, text, missing, show_browser):
     print()
     url = memento.bisect_urls(start_url, end_url, text, missing, show_browser)
-    click.echo(f'\rFound your archive snapshot: {url}')
+    click.echo(f"\rFound your archive snapshot: {url}")
 
 
 def main():

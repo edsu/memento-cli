@@ -9,15 +9,20 @@ from collections import namedtuple
 from .browser import Browser
 
 
-Memento = namedtuple('Memento', ['url', 'datetime'])
+Memento = namedtuple("Memento", ["url", "datetime"])
+
 
 def get_timemap_url(url):
     """
     Look for a Memento Timemap URL in the response headers for a web resource.
     """
     resp = requests.get(url)
-    if resp.status_code == 200 and 'timemap' in resp.links and 'url' in resp.links['timemap']:
-        return resp.links['timemap']['url']
+    if (
+        resp.status_code == 200
+        and "timemap" in resp.links
+        and "url" in resp.links["timemap"]
+    ):
+        return resp.links["timemap"]["url"]
     return None
 
 
@@ -27,14 +32,18 @@ def get_mementos(timemap_url) -> list[Memento]:
     """
     resp = requests.get(timemap_url)
     mementos = []
-    if resp.headers.get('content-type') == 'application/link-format':
+    if resp.headers.get("content-type") == "application/link-format":
         for link in parse_links(resp.text):
-            if link.get('rel') == 'memento':
-                mementos.append(Memento(
-                    link['url'],
-                    datetime.datetime.strptime(link['datetime'], "%a, %d %b %Y %H:%M:%S GMT")
-                ))
-    
+            if link.get("rel") == "memento":
+                mementos.append(
+                    Memento(
+                        link["url"],
+                        datetime.datetime.strptime(
+                            link["datetime"], "%a, %d %b %Y %H:%M:%S GMT"
+                        ),
+                    )
+                )
+
     return mementos
 
 
@@ -45,14 +54,18 @@ def parse_links(text) -> list[dict]:
     # lean on requests for the parsing, but make prep the text to allow for
     # whitespace since parse_header_links is designed for a single line header
 
-    text = re.sub(r'^\s+', '', text)        # strip leading whitespace
-    text = re.sub(r',\s*$', '', text)       # strip trailing comma and any optional whitespace
-    text = re.sub(r'",\r?\n', ', ', text)   # remove dos/unix newlines between links
+    text = re.sub(r"^\s+", "", text)  # strip leading whitespace
+    text = re.sub(
+        r",\s*$", "", text
+    )  # strip trailing comma and any optional whitespace
+    text = re.sub(r'",\r?\n', ", ", text)  # remove dos/unix newlines between links
 
     return requests.utils.parse_header_links(text)
 
 
-def bisect_urls(start_url, end_url, text=None, missing=False, show_browser=False) -> str:
+def bisect_urls(
+    start_url, end_url, text=None, missing=False, show_browser=False
+) -> str:
     timemap_url = get_timemap_url(start_url)
     mementos = sorted(get_mementos(timemap_url), key=lambda m: m.datetime)
     memento_urls = [m.url for m in mementos]
@@ -68,8 +81,7 @@ def bisect_urls(start_url, end_url, text=None, missing=False, show_browser=False
     return bisect(start, end, memento_urls, text, missing, browser)
 
 
-def bisect(start, end, memento_urls, text, missing, browser) -> str: 
-
+def bisect(start, end, memento_urls, text, missing, browser) -> str:
     mid = start + int((end - start) / 2)
     if mid == start:
         return memento_urls[end]
@@ -85,7 +97,7 @@ def bisect(start, end, memento_urls, text, missing, browser) -> str:
             text_in_page = False
     # look in the page text
     else:
-        print('\r' + meter(start, end, len(memento_urls)), end='')
+        print("\r" + meter(start, end, len(memento_urls)), end="")
         text_in_page = text in page_text
 
     # do we want to find the page where the text went missing?
@@ -111,4 +123,4 @@ def meter(start, end, n):
     b = int((end - start + 1) * scale)
     c = int((n - end + 1) * scale)
 
-    return f'[{n - (end - start)}/{n}]: ' + a * '█' + b * '░' + c * '█'
+    return f"[{n - (end - start)}/{n}]: " + a * "█" + b * "░" + c * "█"
