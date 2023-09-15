@@ -4,6 +4,8 @@
 
 A command line tool interacting with Memento ([RFC 7089](https://www.rfc-editor.org/rfc/rfc7089)) supporting web archives, such as the Internet Archive's Wayback Machine.
 
+For more background on why this tool was created see: https://inkdroid.org/2023/09/14/memento-bisect/
+
 ## Usage
 
 ### List Snapshots
