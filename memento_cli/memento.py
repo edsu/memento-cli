@@ -98,7 +98,7 @@ def bisect(start, end, memento_urls, text, missing, browser) -> str:
     # look in the page text
     else:
         print("\r" + meter(start, end, len(memento_urls)), end="")
-        text_in_page = text in page_text
+        text_in_page = bool(re.search(text, page_text))
 
     # do we want to find the page where the text went missing?
     if missing:
