@@ -45,7 +45,7 @@ Let's suppose you know that the [Twitter Hateful Conduct Policy](https://help.tw
 
 > women, people of color, lesbian, gay, bisexual, transgender, queer, intersex, asexual individuals
  
-You can see it in the Internet Archive Wayback Machine [in 2019](https://web.archive.org/web/20190711134608/https://help.twitter.com/en/rules-and-policies/hateful-conduct-policy). But you can't see it [on the page in 2023](https://web.archive.org/web/20230621094005/https://help.twitter.com/en/rules-and-policies/hateful-conduct-policy). To identify when the change was introduced, you can *bisect* the version history to search for the version where the text went missing, using the two snapshots. This will perform a binary search between the two versions looking for the text.
+You can see it in the Internet Archive Wayback Machine [in 2019](https://web.archive.org/web/20190711134608/https://help.twitter.com/en/rules-and-policies/hateful-conduct-policy). But you can't see it [on the page in 2023](https://web.archive.org/web/20230621094005/https://help.twitter.com/en/rules-and-policies/hateful-conduct-policy). To identify when the change was introduced, you can *bisect* the version history to search for the version where the text went missing, using the two snapshots and the `--text` option. This will perform a binary search between the two versions looking for the text.
 
 ```bash
 $ memento bisect --missing --text "women, people of color, lesbian, gay" \
@@ -55,7 +55,7 @@ $ memento bisect --missing --text "women, people of color, lesbian, gay" \
 
 <img src="https://github.com/edsu/memento-cli/raw/main/images/memento.gif">
 
-If you only provide one snapshot URL it will use that as the start index, and use the last snapshot in the archive as the end.
+The `--text` value can be a regular expression too if you want. If you only provide one snapshot URL it will use that as the start index, and use the last snapshot in the archive as the end.
 
 The *bisect* command uses a browser behind the scenes (using Selenium) in order to fully render the page. If you wanted to find out when some text appears (rather than goes missing) then remove the `--missing` parameter from the command.
 

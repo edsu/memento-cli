@@ -25,7 +25,7 @@ def list(url):
 @cli.command()
 @click.argument("start-url")
 @click.argument("end-url", required=False)
-@click.option("--text", help="text to look for on the page")
+@click.option("--text", help="text (or regex) to look for on the page")
 @click.option("--missing", is_flag=True, help="missing text to look for on the page")
 @click.option("--show-browser", is_flag=True, help="see the browser")
 def bisect(start_url, end_url, text, missing, show_browser):
