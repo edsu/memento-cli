@@ -90,12 +90,14 @@ def test_bisect():
     )
     assert url == "http://web.archive.org/web/20230601013229/https://inkdroid.org/"
 
+
 def test_bisect_regex():
     start_url = "http://web.archive.org/web/20200102102511/https://inkdroid.org/"
     end_url = "http://web.archive.org/web/20230902020134/https://inkdroid.org/"
 
     url = bisect_urls(start_url, end_url, "ReSpe. Writing")
     assert url == "http://web.archive.org/web/20230601013229/https://inkdroid.org/"
+
 
 def test_browser():
     browser = Browser(headless=True)
