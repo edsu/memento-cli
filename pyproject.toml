@@ -1,11 +1,14 @@
 [tool.poetry]
 name = "memento-cli"
-version = "0.0.3"
+version = "0.0.4"
 description = "Examine snapshots in eeb archives such as the Internet Archive's Wayback Machine"
 authors = ["Ed Summers <ehs@pobox.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "memento_cli"}]
+
+[project.urls]
+Homepage = "https://github.com/edsu/memento-cli"
 
 [tool.poetry.dependencies]
 python = "^3.9"
