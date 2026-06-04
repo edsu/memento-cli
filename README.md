@@ -8,18 +8,13 @@ For more background on why this tool was created see: https://inkdroid.org/2023/
 
 ## Install 
 
-You should be able to run without installing directly with `uvx` if you have
-[uv] installed already:
+You can pip install:
 
 ```
-$ uvx memento --help
+$ pip install memento-cli
 ```
 
-Or you can just pip install:
-
-```
-$ pip install memento
-```
+## Usage
 
 ### List Snapshots
 
@@ -75,5 +70,3 @@ The *bisect* command uses a browser behind the scenes (using Selenium) in order 
 And if you would prefer to examine the pages in between manually, leave off the `--text` parameter and *memento* will prompt you to continue, and show you the browser it is controlling.
 
 If you would like to see the browser when using `--text` use the `--show-browser` option.
-
-[uv]: https://docs.astral.sh/uv/

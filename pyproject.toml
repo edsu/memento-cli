@@ -1,6 +1,6 @@
 [project]
 name = "memento-cli"
-version = "0.0.5"
+version = "0.0.6"
 description = "Examine snapshots in web archives such as the Internet Archive's Wayback Machine"
 authors = [
     { name = "Ed Summers", email = "ehs@pobox.com" },
