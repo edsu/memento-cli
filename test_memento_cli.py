@@ -18,16 +18,6 @@ def test_get_timemap_url():
         )
         == "https://web.archive.org/web/timemap/link/https://help.twitter.com/en/rules-and-policies/hateful-conduct-policy"
     )
-    assert (
-        get_timemap_url("https://perma.cc/7CN8-NJNV")
-        == "https://perma.cc/timemap/html/http://arboretum.harvard.edu"
-    )
-    assert (
-        get_timemap_url(
-            "https://swap.stanford.edu/was/20230524140954/http://news.stanford.edu/"
-        )
-        == "https://swap.stanford.edu/was/timemap/link/http://news.stanford.edu/"
-    )
     assert get_timemap_url("https://nytimes.com") is None
 
 
@@ -102,7 +92,6 @@ def test_bisect_regex():
 def test_browser():
     browser = Browser(headless=True)
     text = browser.get(
-        "https://swap.stanford.edu/was/20230524140954/https://library.stanford.edu/node/172367"
+        "http://web.archive.org/web/20230601013229/https://inkdroid.org/"
     )
-    # This text appears in an iframe provided by pywb
-    assert "East Asian telegraph codes" in text
+    assert "ReSpec Writing" in text

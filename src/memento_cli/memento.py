@@ -51,7 +51,7 @@ def parse_links(text) -> list[dict]:
     """
     Return a list of dictionaries for RFC 6690 header links.
     """
-    # lean on requests for the parsing, but make prep the text to allow for
+    # lean on requests for the parsing, but prep the text to allow for
     # whitespace since parse_header_links is designed for a single line header
 
     text = re.sub(r"^\s+", "", text)  # strip leading whitespace
@@ -59,6 +59,7 @@ def parse_links(text) -> list[dict]:
         r",\s*$", "", text
     )  # strip trailing comma and any optional whitespace
     text = re.sub(r'",\r?\n', ", ", text)  # remove dos/unix newlines between links
+    text = text.strip()
 
     return requests.utils.parse_header_links(text)
 

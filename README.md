@@ -6,7 +6,20 @@ A command line tool interacting with Memento ([RFC 7089](https://www.rfc-editor.
 
 For more background on why this tool was created see: https://inkdroid.org/2023/09/14/memento-bisect/
 
-## Usage
+## Install 
+
+You should be able to run without installing directly with `uvx` if you have
+[uv] installed already:
+
+```
+$ uvx memento --help
+```
+
+Or you can just pip install:
+
+```
+$ pip install memento
+```
 
 ### List Snapshots
 
@@ -62,3 +75,5 @@ The *bisect* command uses a browser behind the scenes (using Selenium) in order 
 And if you would prefer to examine the pages in between manually, leave off the `--text` parameter and *memento* will prompt you to continue, and show you the browser it is controlling.
 
 If you would like to see the browser when using `--text` use the `--show-browser` option.
+
+[uv]: https://docs.astral.sh/uv/
